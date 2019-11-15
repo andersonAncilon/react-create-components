@@ -1,6 +1,6 @@
 {
-  "name": "create-component",
-  "version": "1.0.0",
+  "name": "nv-create-component",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,6 @@
     "inquirer": "^7.0.0"
   },
   "bin": {
-    "create-component": "index.js"
+    "create-component": "./index.js"
   }
 }
