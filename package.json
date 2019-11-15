@@ -16,6 +16,6 @@
     "inquirer": "^7.0.0"
   },
   "bin": {
-    "create-component": "./index.js"
+    "create-component": "index.js"
   }
 }
