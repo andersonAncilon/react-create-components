@@ -5,18 +5,18 @@
 
 > On a terminal, just type this:
 > 
-> - npm i -g **nv-create-component**
+> - npm i -g **bs-create-component**
 >
-> - **or** yarn add global **nv-create-component**
+> - **or** yarn add global **bs-create-component**
 
 ## How to use
 
 > For function components:
 >
-> - *create-component* componentName **-t** func
+> - *bs-cli* component componentName **-t** func
 >
 > For class components:
-> - *create-component* componentName **-t** class
+> - *bs-cli* component componentName **-t** class
 
 
 ## Parameters

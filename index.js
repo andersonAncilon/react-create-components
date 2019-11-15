@@ -5,40 +5,40 @@ const package = require("./package.json");
 const { join } = require("path");
 const fs = require("fs");
 const chalk = require("chalk");
-const { resolver } = require("./helpers/componentPathResolver");
 const { fileCreate } = require("./services/fileCreateService");
 
 program.version(package.version);
 
 program
-  .command("create-component <name>")
+  .command("component <name>")
   .description("Create a component based on templates.")
   .option("-t, --type [type]", "Create a Functional or Class component")
   .action((name, options) => {
     try {
       const componentDir = options.type === "func" ? "components" : "pages";
 
-      if (!fs.existsSync(componentDir)) {
-        fs.mkdirSync(componentDir);
+      if (!fs.existsSync(join(process.cwd(), componentDir))) {
+        fs.mkdirSync(join(process.cwd(), componentDir));
       }
 
-      fs.mkdirSync(join(__dirname, componentDir, name));
+      fs.mkdirSync(join(process.cwd(), componentDir, name));
 
       switch (options.type) {
         case "func":
-          fileCreate(options.type, componentDir, name, __dirname);
+          
+          fileCreate(options.type, componentDir, name, process.cwd());
           break;
         case "class":
-          fileCreate(options.type, componentDir, name, __dirname);
+          fileCreate(options.type, componentDir, name, process.cwd());
           break;
         default:
-          fileCreate(options.type, componentDir, name, __dirname);
+          fileCreate(options.type, componentDir, name, process.cwd());
           break;
       }
 
-      console.log(`Component ${name} created!`);
+      console.log(chalk.green(`Component ${name} created!`));
     } catch (error) {
-      console.log(`Component ${name} not created! Reason: ${error})}`);
+      console.log(chalk.red(`Component ${name} not created! Reason: ${error})}`));
     }
   });
 
