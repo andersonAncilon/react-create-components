@@ -36,9 +36,9 @@ program
           break;
       }
 
-      console.log(`${chalk.green("Component created!")}`);
+      console.log(`Component ${name} created!`);
     } catch (error) {
-      console.log(`${chalk.red("Component not created! Reason: " + error)}`);
+      console.log(`Component ${name} not created! Reason: ${error})}`);
     }
   });
 
