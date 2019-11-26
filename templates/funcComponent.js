@@ -1,6 +1,7 @@
 module.exports = {
-  template: style => `
+  template: (style, name) => `
   import React from 'react';
+  import PropTypes from 'prop-types';
   import '${style}';
 
   const ComponentName = props => {
@@ -10,7 +11,9 @@ module.exports = {
       </div>
     );
   };
+
+  ${name}.propType = {};
+  ${name}.defaultProps = {};
   
-  export default ComponentName;
-    `
+  export default ComponentName;`
 };

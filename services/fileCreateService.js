@@ -9,8 +9,8 @@ module.exports = {
     const stylePath = resolver(rootDir, componentDir, name, ".scss");
     const content =
       type === "func"
-        ? funcComponent.template(`${name}.scss`)
-        : classComponent.template(`${name}.scss`);
+        ? funcComponent.template(`${name}.scss`, name)
+        : classComponent.template(`${name}.scss`, name);
 
     fs.writeFileSync(componentPath, content);
     fs.writeFileSync(stylePath, ".container {}");

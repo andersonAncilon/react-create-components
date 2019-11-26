@@ -16,29 +16,35 @@ program
   .action((name, options) => {
     try {
       const componentDir = options.type === "func" ? "components" : "pages";
-
-      if (!fs.existsSync(join(process.cwd(), componentDir))) {
-        fs.mkdirSync(join(process.cwd(), componentDir));
+      if (!fs.existsSync("src")) {
+        fs.mkdirSync("src");
       }
 
-      fs.mkdirSync(join(process.cwd(), componentDir, name));
+      let rootDir = join(process.cwd(), "src");
+
+      if (!fs.existsSync(join(process.cwd(), "src", componentDir))) {
+        fs.mkdirSync(join(process.cwd(), "src", componentDir));
+      }
+
+      fs.mkdirSync(join(rootDir, componentDir, name));
 
       switch (options.type) {
         case "func":
-          
-          fileCreate(options.type, componentDir, name, process.cwd());
+          fileCreate(options.type, componentDir, name, rootDir);
           break;
         case "class":
-          fileCreate(options.type, componentDir, name, process.cwd());
+          fileCreate(options.type, componentDir, name, rootDir);
           break;
         default:
-          fileCreate(options.type, componentDir, name, process.cwd());
+          fileCreate(options.type, componentDir, name, rootDir);
           break;
       }
 
       console.log(chalk.green(`Component ${name} created!`));
     } catch (error) {
-      console.log(chalk.red(`Component ${name} not created! Reason: ${error})}`));
+      console.log(
+        chalk.red(`Component ${name} not created! Reason: ${error})}`)
+      );
     }
   });
 

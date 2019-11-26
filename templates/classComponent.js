@@ -1,5 +1,5 @@
 module.exports = {
-  template: style => `
+  template: (style, name) => `
   import React from 'react';
   import '${style}';
 
@@ -17,6 +17,9 @@ module.exports = {
       );
     }
   }
+
+  ${name}.propType = {};
+  ${name}.defaultProps = {};
   
   export default ComponentName;
       `
