@@ -5,7 +5,8 @@ const package = require("./package.json");
 const { join } = require("path");
 const fs = require("fs");
 const chalk = require("chalk");
-const { fileCreate } = require("./services/fileCreateService");
+const { fileCreate, createIfNoExist } = require("./services/fileCreateService");
+const { getUserName } = require("./services/gitService");
 
 program.version(package.version);
 
@@ -16,27 +17,29 @@ program
   .action((name, options) => {
     try {
       const componentDir = options.type === "func" ? "components" : "pages";
-      if (!fs.existsSync("src")) {
-        fs.mkdirSync("src");
-      }
+      const rootDir = join(process.cwd(), "src");
+      const userName = getUserName();
+      createIfNoExist(rootDir);
 
-      let rootDir = join(process.cwd(), "src");
+      createIfNoExist(join(rootDir, componentDir));
 
-      if (!fs.existsSync(join(process.cwd(), "src", componentDir))) {
-        fs.mkdirSync(join(process.cwd(), "src", componentDir));
-      }
+      createIfNoExist(
+        join(rootDir, componentDir, name),
+        true,
+        "component already exist!!!"
+      );
 
-      fs.mkdirSync(join(rootDir, componentDir, name));
+      console.log(userName);
 
       switch (options.type) {
         case "func":
-          fileCreate(options.type, componentDir, name, rootDir);
+          fileCreate(options.type, componentDir, name, rootDir, userName);
           break;
         case "class":
-          fileCreate(options.type, componentDir, name, rootDir);
+          fileCreate(options.type, componentDir, name, rootDir, userName);
           break;
         default:
-          fileCreate(options.type, componentDir, name, rootDir);
+          fileCreate(options.type, componentDir, name, rootDir, userName);
           break;
       }
 

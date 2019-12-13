@@ -1,26 +1,26 @@
 module.exports = {
-  template: (style, name) => `
-  import React from 'react';
-  import '${style}';
+  template: (style, userName) => `
+${userName && `/*-------- CREATED BY: ${userName} --------*/`}
+import React from 'react';
+import './${style}';
 
-  class ComponentName {
-    constructor(props) {
-      super(props);
-      this.state = {};
-    }
-  
-    render() {
-      return (
-        <div>
-          <h2>New component</h2>
-        </div>
-      );
-    }
+class ComponentName {
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
-
-  ${name}.propType = {};
-  ${name}.defaultProps = {};
   
-  export default ComponentName;
-      `
+  render() {
+    return (
+      <div>
+        <h2>New component</h2>
+      </div>
+    );
+  }
+}
+
+ComponentName.propType = {};
+ComponentName.defaultProps = {};
+  
+export default ComponentName;`
 };
