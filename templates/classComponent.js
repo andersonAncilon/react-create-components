@@ -1,10 +1,10 @@
 module.exports = {
-  template: (style, userName) => `
-${userName && `/*-------- CREATED BY: ${userName} --------*/`}
+  template: (style, userName, createdAt) => `
+${userName && `/*-------- CREATED BY: ${userName} IN: ${createdAt}--------*/`}
 import React from 'react';
 import './${style}';
 
-class ComponentName {
+class ComponentName extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {};

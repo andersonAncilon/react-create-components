@@ -5,8 +5,15 @@ const package = require("./package.json");
 const { join } = require("path");
 const fs = require("fs");
 const chalk = require("chalk");
-const { fileCreate, createIfNoExist } = require("./services/fileCreateService");
+const { createIfNoExist } = require("./services/fileCreateService");
+const { createComponentAndTest } = require("./services/componentCreateService");
 const { getUserName } = require("./services/gitService");
+const {
+  STATELESS_COMPONENT_DIR,
+  STATEFULL_COMPONENT_DIR,
+  COMPONENT_ROOT_DIR,
+  TEST_DIR
+} = require("./constants/paths");
 
 program.version(package.version);
 
@@ -16,30 +23,67 @@ program
   .option("-t, --type [type]", "Create a Functional or Class component")
   .action((name, options) => {
     try {
-      const componentDir = options.type === "func" ? "components" : "pages";
-      const rootDir = join(process.cwd(), "src");
+      const { type } = options;
+
+      // Determina qual o tipo de componente a ser criado
+      const componentDir =
+        options.type === "func"
+          ? STATELESS_COMPONENT_DIR
+          : STATEFULL_COMPONENT_DIR;
+
+      // Determina o diretório raiz do componente
+      const rootDir = join(process.cwd(), COMPONENT_ROOT_DIR);
+      // Determina o diretório raiz dos testes
+      const testDir = join(process.cwd(), TEST_DIR);
+      // Busca o usuário do git
       const userName = getUserName();
+
+      // Cria as pastas de componente e teste, caso não existam (~/src, ~/__tests__)
       createIfNoExist(rootDir);
+      createIfNoExist(testDir);
 
+      // Cria a pasta do componente e do teste
       createIfNoExist(join(rootDir, componentDir));
+      createIfNoExist(join(testDir, componentDir));
 
+      // Cria o componente, caso não exista
       createIfNoExist(
         join(rootDir, componentDir, name),
         true,
         "component already exist!!!"
       );
+      const finalTestDir = join(testDir, componentDir);
 
-      console.log(userName);
-
-      switch (options.type) {
+      switch (type) {
         case "func":
-          fileCreate(options.type, componentDir, name, rootDir, userName);
+          createComponentAndTest({
+            type,
+            componentDir,
+            name,
+            rootDir,
+            userName,
+            finalTestDir
+          });
           break;
         case "class":
-          fileCreate(options.type, componentDir, name, rootDir, userName);
+          createComponentAndTest({
+            type,
+            componentDir,
+            name,
+            rootDir,
+            userName,
+            finalTestDir
+          });
           break;
         default:
-          fileCreate(options.type, componentDir, name, rootDir, userName);
+          createComponentAndTest({
+            type,
+            componentDir,
+            name,
+            rootDir,
+            userName,
+            finalTestDir
+          });
           break;
       }
 
