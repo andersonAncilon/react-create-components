@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 const program = require("commander");
 const package = require("./package.json");
 const { join } = require("path");
@@ -33,6 +32,7 @@ program
 
       // Determina o diretório raiz do componente
       const rootDir = join(process.cwd(), COMPONENT_ROOT_DIR);
+      debugger;
       // Determina o diretório raiz dos testes
       const testDir = join(process.cwd(), TEST_DIR);
       // Busca o usuário do git
