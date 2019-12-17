@@ -26,9 +26,9 @@ program
 
       // Determina qual o tipo de componente a ser criado
       const componentDir =
-        options.type === "func"
-          ? STATELESS_COMPONENT_DIR
-          : STATEFULL_COMPONENT_DIR;
+        options.type === "stf"
+          ? STATEFULL_COMPONENT_DIR
+          : STATELESS_COMPONENT_DIR;
 
       // Determina o diretório raiz do componente
       const rootDir = join(process.cwd(), COMPONENT_ROOT_DIR);

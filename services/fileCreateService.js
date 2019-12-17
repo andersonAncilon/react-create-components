@@ -11,9 +11,9 @@ module.exports = {
     const stylePath = resolver(rootDir, componentDir, name, ".scss");
     const createdAt = new Date().toLocaleDateString("pt-br");
     const content =
-      type === "func"
-        ? funcComponent.template(`${name}.scss`, userName, createdAt)
-        : classComponent.template(`${name}.scss`, userName, createdAt);
+      type === "stf"
+        ? classComponent.template(`${name}.scss`, userName, createdAt)
+        : funcComponent.template(`${name}.scss`, userName, createdAt);
 
     fs.writeFileSync(componentPath, content);
     fs.writeFileSync(stylePath, ".container {}");
