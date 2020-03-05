@@ -6,7 +6,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 enzyme.configure({ adapter: new Adapter() });
     
-describe(<${componentName}/>, () => {
+describe('<${componentName}/>', () => {
     test('Please, implement this test', () => {
         expect(1).toBe(1);
     });

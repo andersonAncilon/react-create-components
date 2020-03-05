@@ -1,7 +1,4 @@
-const {
-  componentCreate,
-  testCreate
-} = require("../services/fileCreateService");
+const { componentCreate, testCreate } = require("./fileService");
 
 module.exports = {
   createComponentAndTest: props => {
